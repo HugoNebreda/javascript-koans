@@ -15,35 +15,35 @@ describe("About Objects", function () {
       expect(meglomaniac.henchwoman).toBe(__);
       expect(meglomaniac.henchWoman).toBe(__);
     });
-  });
 
+    it("should know properties that are functions act like methods", function () {
+      var meglomaniac = {
+        mastermind : "Brain",
+        henchman: "Pinky",
+        battleCry: function (noOfBrains) {
+          return "They are " + this.henchman + " and the" +
+            Array(noOfBrains + 1).join(" " + this.mastermind);
+        }
+      };
 
-  it("should know properties that are functions act like methods", function () {
-    var meglomaniac = {
-      mastermind : "Brain",
-      henchman: "Pinky",
-      battleCry: function (noOfBrains) {
-        return "They are " + this.henchman + " and the" +
-          Array(noOfBrains + 1).join(" " + this.mastermind);
-      }
-    };
+      battleCry = meglomaniac.battleCry(2);
+      expect(__).toMatch(battleCry);
+    });
 
-    battleCry = meglomaniac.battleCry(2);
-    expect(__).toMatch(battleCry);
-  });
+    it("should confirm that when a function is attached to an object, 'this' refers to the object", function () {
+      var currentYear = 2011; // Update me!
+      var meglomaniac = {
+        mastermind: "James Wood",
+        henchman: "Adam West",
+        birthYear: 1970,
+        calculateAge: function () {
+          return currentYear - this.birthYear;
+        }
+      };
 
-  it("should confirm that when a function is attached to an object, 'this' refers to the object", function () {
-    var currentYear = 2011; // Update me!
-    var meglomaniac = {
-      mastermind: "James Wood",
-      henchman: "Adam West",
-      birthYear: 1970,
-      calculateAge: function () {
-        return currentYear - this.birthYear;
-      }
-    };
+      expect(meglomaniac.calculateAge()).toBe(__);
+    });
 
-    expect(meglomaniac.calculateAge()).toBe(__);
   });
 
   describe("'in' keyword", function () {
